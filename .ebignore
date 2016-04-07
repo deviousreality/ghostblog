@@ -1,0 +1,7 @@
+.ebextensions/environment.example.config
+config.example.js
+README.md
+
+# git
+.git/*
+.gitignore

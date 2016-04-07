@@ -19,7 +19,7 @@
   "main": "./core/index",
   "scripts": {
     "preinstall": "npm install semver && node -e \"require('./core/server/utils/startup-check.js').nodeVersion()\"",
-    "start": "node index",
+    "start": "node index  -production",
     "test": "grunt validate --verbose"
   },
   "engines": {
@@ -63,7 +63,6 @@
     "rss": "1.2.1",
     "semver": "5.1.0",
     "showdown-ghost": "0.3.6",
-    "sqlite3": "3.1.1",
     "unidecode": "0.1.8",
     "validator": "4.5.0",
     "xml": "1.0.1"
@@ -102,6 +101,7 @@
     "should-http": "0.0.4",
     "should-sinon": "0.0.5",
     "sinon": "1.17.3",
+    "sqlite3": "3.1.1",
     "supertest": "1.1.0",
     "top-gh-contribs": "2.0.2"
   },
