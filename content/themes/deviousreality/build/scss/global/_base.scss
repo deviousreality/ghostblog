@@ -1,0 +1,63 @@
+// Copyright 2015 DeviousReality
+//
+// 1.0 Base Styles
+//
+/// <reference path="variables.scss" />
+
+
+// Base Styles // ------------------------------------
+
+html {
+  font-family: $font-family-primary;
+  font-size: $html-base;
+  font-weight: $font-normal;
+}
+body {
+  background: $body-bkg-color;
+  font-size: $font-size-base;
+  font-weight: $font-normal;
+  line-height: $line-height-base;
+  color: $font-color;
+  overflow-x: hidden;
+}
+
+// Link Styles // ------------------------------------
+
+a {
+  color: $link-color;
+  &:hover {
+    color: $link-color-hover;
+    outline: none;
+  }
+  &:visited {
+    color: $link-color-visited;
+  }
+  &:active {
+    outline: none;
+  }
+}
+
+// List Styles // ------------------------------------
+
+ul,
+ol {
+  padding-left: 25px;
+}
+ol li,
+ul li {
+  padding-bottom: 10px;
+}
+.list-nostyle {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.list-inline {
+  display: inline-block;
+  padding-left: 0;
+  list-style: none;
+}
+hr {
+  margin-bottom: 2.5rem;
+  border-top: 1px solid $alto;
+}

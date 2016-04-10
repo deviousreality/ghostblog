@@ -1,0 +1,169 @@
+// Copyright 2015 DeviousReality
+//
+// 1.0 Variables
+// All global variables wil be found in this document. They will
+// comply with all formatting and naming guidelines.
+/// <reference path="colors.scss" />
+
+
+// Scaffolding // ------------------------------------
+
+// Background color for '<body>'
+$body-bkg-color:        $gallery;
+
+// Base number for HTML font size. Used to keep rem
+// font sizes at base 10. 1rem = 10px.
+$html-base: 62.5%;
+
+// Global link colors
+$link-color:            $denim;
+$link-color-hover:      darken($link-color, 15%);
+$link-color-visited:    $bunting;
+$link-hover-decoration: underline;
+
+// Typography // ------------------------------------
+
+$font-family-primary:    Helvetica, Arial, 'DejaVu Sans', 'Liberation Sans', Freesans, sans-serif;
+$font-family-secondary: 'Open Sans', sans-serif;
+//$font-icon: 'FontAwesome';
+
+// Font-weight Scale // ------------------------------------
+$font-thin:             100;
+$font-extra-light:      200;
+$font-light:            300; // Open Sans only
+$font-normal:           400; // Open Sans only
+$font-medium:           500;
+$font-semi-bold:        600; // Open Sans only
+$font-bold:             700;
+$font-extra-bold:       800;
+$font-black:            900;
+
+// Global text color
+$font-color:            $tundora;
+
+// Global Font Styling
+$font-size-base:        1.3rem !default;
+$line-height-base:      2rem   !default;
+
+// Grid Settings
+$column: 76px;
+$gutter: 16px;
+$grid-columns: 12;
+$max-width: em(1088);
+
+//Namespace
+$grid-namespace: 'l-row' !default;
+$grid-column-namespace: 'column' !default;
+
+$col-groups: (2, 3, 4, 5, 6, 8, 12) !default;
+
+//Gutter width
+$gutter-width: 2rem !default;
+
+// Pushes and pulls
+$pushes: true !default;
+$pulls: true !default;
+// Buttons // ------------------------------------
+
+$button-default-bkg: $white;
+$button-default-border: $silver;
+$button-default-color: $tundora;
+
+$button-primary-bkg: $tundora;
+$button-primary-border: $tundora;
+$button-primary-color: $white;
+
+$button-secondary-bkg: $concrete;
+$button-secondary-border: $silver;
+$button-secondary-color: $tundora;
+
+$button-tertiary-bkg: $white;
+$button-tertiary-border: $silver;
+$button-tertiary-color: $tundora;
+
+$button-success-bkg: $limeade;
+$button-success-border: darken($limeade, 7);
+$button-success-color: $white;
+
+$button-clear-bkg: transparent;
+$button-clear-border: $white;
+$button-clear-color: $white;
+
+$button-float-boxalpha: rgba(0, 0, 0, 0.4);
+
+// Forms // ------------------------------------
+
+$form-label-color: $dove-gray;
+
+$input-bkg: $concrete;
+$input-border: $silver;
+$input-color: $tundora;
+
+$input-color-placeholder: $silver;
+
+$input-bkg-disabled: $white;
+$input-border-disabeled: $alto;
+
+// Tables // ------------------------------------
+
+$table-alt-bkg: $concrete;
+$table-hover-bkg: $gallery;
+
+$table-cell-border: $mercury;
+$table-cell-padding: 1rem;
+
+// State Colors // ------------------------------------
+
+$state-error-color: $grenadier;
+$state-error-bkg: $fair-pink;
+$state-error-border: $mona-lisa;
+
+$state-success-color: $limeade;
+$state-success-bkg: $peppermint;
+$state-success-border: $limeade;
+
+$state-warning-color: $flush-orange;
+$state-warning-bkg: $peach-cream;
+$state-warning-border: $peach-orange;
+
+$state-info-color: $white;
+$state-info-bkg: $dusty-gray;
+$state-info-border: $black;
+
+// Z-index Scale // ------------------------------------
+
+$z-index-1:      100;
+$z-index-2:      200;
+$z-index-3:      300;
+$z-index-4:      400;
+$z-index-5:      500;
+$z-index-6:      600;
+$z-index-7:      700;
+$z-index-8:      800;
+$z-index-9:      900;
+$z-index-10:     1000;
+
+// Z-Index Variables // ------------------------------------
+
+$z-l-main:              $z-index-2;
+$z-l-footer:            $z-index-2;
+
+$z-l-header-secondary:  $z-index-3;
+
+$z-l-header:            $z-index-4;
+
+$z-nav-collapse:        $z-index-5;
+$z-underlay:            $z-index-5;
+
+$z-button-floating:     $z-index-6;
+$z-m-modal:             $z-index-6;
+
+// Media queries breakpoints // ------------------------------------
+
+$bp-smallest:    24.615em; // 320px
+$bp-smaller:     36.923em; // 480px
+$bp-small:       46.154em; // 600px
+$bp-medium:      59.077em; // 768px
+$bp-large:       69.231em; // 900px
+$bp-larger:      84.615em; // 1100px
+$bp-largest:     100em;    // 1300px

@@ -1,0 +1,4 @@
+#ignore temp files
+.sass-cache
+node_modules
+build/scss-lint-reporter.xml

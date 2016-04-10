@@ -1,0 +1,338 @@
+// Copyright 2015 DeviousReality
+//
+// 1.0 Mixins
+// A collection of useful SASS mixins library.
+/// <reference path="variables.scss" />
+
+// Breakpoints // ------------------------------------
+
+// @access public
+// @param {String} $point - Breakpoint media
+// @example scss - Usage
+//   .foo {
+//     @include media(tablet){
+//       width:100%;
+//     }
+//@mixin media($point) {
+//  @if $point == desktop {
+//    @media (min-width: $bp-larger) { @content ; }
+//  }
+//  @else if $point == laptop {
+//    @media (min-width: $bp-large) { @content ; }
+//  }
+//  @else if $point == tablet {
+//    @media (min-width: $bp-medium) { @content ; }
+//  }
+//  @else if $point == phablet {
+//    @media (min-width: $bp-small)  { @content ; }
+//  }
+//  @else if $point == handheld {
+//    @media (max-width: $bp-smaller)  { @content ; }
+//  }
+//}
+
+// Pixel to Em Converter // ------------------------------------ Bourbon.IO
+
+// @access public
+// @param {Number} $pixels - Pixel to convert
+// @param {Number} $context - Base number
+//@function em($pixels, $context: $html-base) {
+//  @return #{$pixels/$context}em
+//}
+
+// Transform // ------------------------------------ Bourbon.IO
+
+// @access public
+// @param {String} $transformation - The transform to apply
+// @example scss - Usage
+//   .foo {
+//     @include transform(translateX(10px));
+//   }
+// @example css - Result
+//   .foo {
+//     -webkit-transform: translateX(10px);
+//     -ms-transform: translateX(10px);
+//     transform: translateX(10px);
+//   }
+//@mixin transform($transformation) {
+//  @include prefix(transform, $transformation, 'webkit' 'ms');
+//}
+
+// Transition // ------------------------------------ Bourbon.IO
+
+// @access public
+// @param {Time} $time [1s] - Duration
+// @param {String} $timing-function [ease-in-out] - Timing function or cubic bezier curve
+// @example scss - Usage
+//   .foo {
+//     @include transition(0.3s, all, ease-in);
+//   }
+// @example css - Result
+//   .foo {
+//     -webkit-transition: all 0.3s ease-in;
+//     transition: all 0.3s ease-in;
+//   }
+//@mixin transition($time: 1s, $type: all, $timing-function: ease-in-out) {
+//  @include prefix(transition, $type $time $timing-function, 'webkit');
+//}
+
+// Background gradient // ------------------------------------ Bourbon.IO
+
+// @access public
+// @param {Color} $start-color - Start color
+// @param {Color} $end-color - End color
+// @param {String} $orientation - Type of gradient, either `vertical`, `horizontal` or `radial`
+// @example scss - Usage
+//   .foo {
+//     @include background-gradient(red, black, 'vertical');
+//   }
+// @example css - Result
+//   .foo {
+//     background: -webkit-linear-gradient(top, red, black);
+//     background: linear-gradient(to bottom, red, black);
+//   }
+@mixin background-gradient($start-color, $end-color, $orientation) {
+  background: $start-color;
+
+  @if $orientation == 'vertical' {
+    background: -webkit-linear-gradient(top, $start-color, $end-color);
+    background: linear-gradient(to bottom, $start-color, $end-color);
+  }
+  @else if $orientation == 'horizontal' {
+    background: -webkit-linear-gradient(left, $start-color, $end-color);
+    background: linear-gradient(to right, $start-color, $end-color);
+  }
+  @else {
+    background: -webkit-radial-gradient(center, ellipse cover, $start-color, $end-color);
+    background: radial-gradient(ellipse at center, $start-color, $end-color);
+  }
+}
+
+// Border Radius // ------------------------------ Bourbon.IO
+
+@mixin border-radius($top-right, $bottom-right, $bottom-left, $top-left) {
+  @include prefixer(border-top-right-radius, $top-right, 'webkit');
+  @include prefixer(border-bottom-right-radius, $bottom-right, 'webkit');
+  @include prefixer(border-bottom-left-radius, $bottom-left, 'webkit');
+  @include prefixer(border-top-left-radius, $top-left, 'webkit');
+  @include prefixer(background-clip, padding-box, 'webkit' 'moz'); // stops bg color from leaking outside the border:
+}
+
+// Box Shadow // -----------------------------------
+
+@mixin box-shadow($top, $left, $blur, $size, $color, $inset: false) {
+  @if $inset {
+    -webkit-box-shadow: inset $top $left $blur $size $color;
+    -moz-box-shadow: inset $top $left $blur $size $color;
+    box-shadow: inset $top $left $blur $size $color;
+  }
+  @else {
+    -webkit-box-shadow: $top $left $blur $size $color;
+    -moz-box-shadow: $top $left $blur $size $color;
+    box-shadow: $top $left $blur $size $color;
+  }
+}
+
+// Text Overflow Helper // ------------------------------------
+
+// @access public
+// @param {String} $type - Either `ellipsis` or `clip`
+// @example scss - Usage
+//   .foo {
+//     @include text-overflow(ellipsis);
+//   }
+// @example css - Result
+//   .foo {
+//     -moz-text-overflow: ellipsis;
+//     -o-text-overflow: ellipsis;
+//     text-overflow: ellipsis;
+//   }
+@mixin text-overflow($type) {
+  @include prefixer(text-overflow, $type, 'ms' 'o');
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// Centers Elements // ------------------------------------
+
+// @access public
+// @example scss - Usage
+//   .foo {
+//     @include center-block;
+//   }
+// @example css - Result
+//   .foo {
+//     display: block;
+//     margin-left: auto;
+//     margin-right: auto;
+//   }
+@mixin center-block {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+// Hardware Acceleration // ------------------------------------
+
+// Forces browsers to use hardware acceleration for transforms
+// @access public
+// @example scss - Usage
+//   .foo {
+//     @include ha;
+//   }
+// @example css - Result
+//   .foo {
+//     -webkit-transform: translate3d(0, 0, 0);
+//     -moz-transform: translate3d(0, 0, 0);
+//     transform: translate3d(0, 0, 0);
+//   }
+@mixin ha {
+  @include prefixer(transform, translate3d(0, 0, 0), 'webkit' 'ms');
+}
+
+// Opacity // ------------------------------------
+
+// @access public
+// @param {Float} $opacity - Opacity
+// @example scss - Usage
+//   .foo {
+//     @include opacity(0.5);
+//   }
+// @example css - Result
+//   .foo {
+//     opacity: 0.5;
+//     filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#50)";
+//   }
+@mixin opacity($opacity) {
+  opacity: $opacity;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$opacity * 100})";
+}
+
+// Placeholder Text // ------------------------------------ Bourbon.IO
+// @access public
+// @param {Color} $color - color variable
+// @example scss - Usage
+//  input {
+//      @include placeholder();
+//  }
+// @example css - Result
+//  input{
+//    &:-moz-placeholder            { color: $input-color-placeholder; }
+//    &::-moz-placeholder           { color: $input-color-placeholder; }
+//    &:-ms-input-placeholder       { color: $input-color-placeholder; }
+//    &::-webkit-input-placeholder  { color: $input-color-placeholder; }
+//  }
+//@mixin placeholder($color: $input-color-placeholder) {
+//  &:-moz-placeholder { color: $color; } // Firefox 4-18
+//  &::-moz-placeholder { color: $color; } // Firefox 19+
+//  &:-ms-input-placeholder { color: $color; } // Internet Explorer 10+
+//  &::-webkit-input-placeholder { color: $color; } // Safari and Chrome
+//}
+
+// Button Styles // --------------------------------------
+
+// @access public
+// @param {String} $type - Button Name Type
+// @param {Color} $bkg-color - background color variable
+// @param {Color} $border-color - Border color variable
+// @param {Color} $color - Font color variable
+// @xample scss - Usage
+//  .button-primary {
+//     @include button-style(primary, $button-primary-bkg, $button-primary-border, $button-primary-color);
+//  }
+// @example css - Result
+//  .button-primary {
+//    background: $bkg-color;
+//    border-color: $border-color;
+//    color: $color;
+//    &:hover {
+//      border-color: $border-color;
+//      background-color: $bkg-color;
+//    }
+//    &:visited {
+//     color: $color;
+//     text-decoration: none;
+//    }
+//    &[disabled],
+//    &.is-disabled {
+//      color: $color;
+//    }
+//}
+@mixin button-style($type, $bkg-color, $border-color, $color) {
+  @if $type == 'tertiary' {
+    @include background-gradient($bkg-color, darken($bkg-color, 8), vertical);
+  }
+  @else {
+    background: $bkg-color;
+  }
+  border-color: $border-color;
+  color: $color;
+  &:hover {
+    @if $type == 'default' {
+      border-color: darken($border-color, 5);
+      background-color: darken($bkg-color, 5);
+    }
+    @else if $type == 'primary' {
+      border-color: darken($border-color, 20);
+      @include background-gradient($bkg-color, darken($bkg-color, 20), vertical);
+    }
+    @else if $type == 'secondary' {
+      border-color: darken($border-color, 13);
+      @include background-gradient($bkg-color, darken($bkg-color, 2), vertical);
+    }
+    @else if $type == 'tertiary' {
+      border-color: darken($border-color, 13);
+      @include background-gradient(darken($bkg-color, 5), darken($bkg-color, 11), vertical);
+    }
+    color: $color;
+  }
+  &:visited {
+    color: $color;
+    text-decoration: none;
+  }
+  &[disabled],
+  &.is-disabled {
+    @if $type == 'default' {
+      color: lighten($color, 33);
+    }
+    @else if $type == 'primary' {
+      background: lighten($bkg-color, 16);
+      border-color: lighten($border-color, 13);
+      color: darken($color, 23);
+    }
+    @else if $type == 'secondary' {
+      background: lighten($bkg-color, 2);
+      border-color: $border-color;
+      color: lighten($color, 33);
+    }
+    @else if $type == 'tertiary' {
+      background: $bkg-color;
+      border-color: $border-color;
+      color: lighten($color, 33);
+    }
+    @else if $type == 'clear' {
+      @include opacity(0.25);
+    }
+  }
+}
+
+// Clearfix // ------------------------------------ Bourbon.IO
+// @access public
+// @example scss - Usage
+//   .foo {
+//     @extend %clearfix;
+//   }
+@mixin clearfix {
+  *zoom: 1;
+
+  &::before,
+  &::after {
+    display: table;
+    content: ' ';
+  }
+
+  &::after {
+    clear: both;
+  }
+}

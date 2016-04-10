@@ -1,0 +1,43 @@
+﻿// Copyright 2015 Bisk Education
+//
+// Debug Classes
+// Only use temporarily to debug missing elements or
+// layout issues you might come across. It's an added
+// security net to use in your toolbelt of options.
+
+
+[class^="l-"],
+[class*=" l-"] {
+  outline: 1px solid $rajah;
+}
+[class^="m-"],
+[class*=" m-"] {
+  outline: 1px dotted $cornflower-blue;
+}
+[class^="u-"],
+[class*=" u-"] {
+  outline: 1px solid $mountains-majesty;
+}
+[class^="_"],
+[class*=" _"] {
+  outline: 1px solid $red-berry;
+}
+
+
+// Add class to any layout element to visually debug
+// missing selectors
+.debug *[href='#'],
+.debug *[src=''],
+.debug *[alt=''],
+.debug *:not([title]),
+.debug *:not([src]),
+.debug *:not([href]),
+.debug *:not([alt]),
+.debug *[title=''],
+.debug *[style] {
+  outline: 1px dotted $concrete;
+}
+//*:hover .debug * {
+//    background:rgba(0,0,0,.3);
+//    outline: 1px solid rgba(0,0,0,.5);
+//}
