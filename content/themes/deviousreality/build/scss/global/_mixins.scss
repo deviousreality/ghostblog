@@ -13,34 +13,48 @@
 //     @include media(tablet){
 //       width:100%;
 //     }
-//@mixin media($point) {
-//  @if $point == desktop {
-//    @media (min-width: $bp-larger) { @content ; }
-//  }
-//  @else if $point == laptop {
-//    @media (min-width: $bp-large) { @content ; }
-//  }
-//  @else if $point == tablet {
-//    @media (min-width: $bp-medium) { @content ; }
-//  }
-//  @else if $point == phablet {
-//    @media (min-width: $bp-small)  { @content ; }
-//  }
-//  @else if $point == handheld {
-//    @media (max-width: $bp-smaller)  { @content ; }
-//  }
-//}
+@mixin media($point) {
+  @if $point == desktop {
+    @media (min-width: $bp-larger) { @content ; }
+  }
+  @else if $point == laptop {
+    @media (min-width: $bp-large) { @content ; }
+  }
+  @else if $point == tablet {
+    @media (min-width: $bp-medium) { @content ; }
+  }
+  @else if $point == phablet {
+    @media (min-width: $bp-small)  { @content ; }
+  }
+  @else if $point == handheld {
+    @media (max-width: $bp-smaller)  { @content ; }
+  }
+}
 
-// Pixel to Em Converter // ------------------------------------ Bourbon.IO
+// Vendor Prefixes Helper // ------------------------------------
+
+// @access private
+// @param {String} $property - Unprefixed CSS property
+// @param {*} $value - Raw CSS value
+// @param {List} $prefixes - List of prefixes to output
+@mixin prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    -#{$prefix}-#{$property}: $value;
+  }
+
+  #{$property}: $value;
+}
+
+// Pixel to Em Converter // ------------------------------------
 
 // @access public
 // @param {Number} $pixels - Pixel to convert
 // @param {Number} $context - Base number
-//@function em($pixels, $context: $html-base) {
-//  @return #{$pixels/$context}em
-//}
+@function em($pixels, $context: $html-base) {
+  @return #{$pixels / $context}em
+}
 
-// Transform // ------------------------------------ Bourbon.IO
+// Transform // ------------------------------------
 
 // @access public
 // @param {String} $transformation - The transform to apply
@@ -54,11 +68,11 @@
 //     -ms-transform: translateX(10px);
 //     transform: translateX(10px);
 //   }
-//@mixin transform($transformation) {
-//  @include prefix(transform, $transformation, 'webkit' 'ms');
-//}
+@mixin transform($transformation) {
+  @include prefix(transform, $transformation, 'webkit' 'ms');
+}
 
-// Transition // ------------------------------------ Bourbon.IO
+// Transition // ------------------------------------
 
 // @access public
 // @param {Time} $time [1s] - Duration
@@ -72,11 +86,11 @@
 //     -webkit-transition: all 0.3s ease-in;
 //     transition: all 0.3s ease-in;
 //   }
-//@mixin transition($time: 1s, $type: all, $timing-function: ease-in-out) {
-//  @include prefix(transition, $type $time $timing-function, 'webkit');
-//}
+@mixin transition($time: 1s, $type: all, $timing-function: ease-in-out) {
+  @include prefix(transition, $type $time $timing-function, 'webkit');
+}
 
-// Background gradient // ------------------------------------ Bourbon.IO
+// Background gradient // ------------------------------------
 
 // @access public
 // @param {Color} $start-color - Start color
@@ -108,14 +122,14 @@
   }
 }
 
-// Border Radius // ------------------------------ Bourbon.IO
+// Border Radius // ------------------------------
 
 @mixin border-radius($top-right, $bottom-right, $bottom-left, $top-left) {
-  @include prefixer(border-top-right-radius, $top-right, 'webkit');
-  @include prefixer(border-bottom-right-radius, $bottom-right, 'webkit');
-  @include prefixer(border-bottom-left-radius, $bottom-left, 'webkit');
-  @include prefixer(border-top-left-radius, $top-left, 'webkit');
-  @include prefixer(background-clip, padding-box, 'webkit' 'moz'); // stops bg color from leaking outside the border:
+  @include prefix(border-top-right-radius, $top-right, 'webkit');
+  @include prefix(border-bottom-right-radius, $bottom-right, 'webkit');
+  @include prefix(border-bottom-left-radius, $bottom-left, 'webkit');
+  @include prefix(border-top-left-radius, $top-left, 'webkit');
+  @include prefix(background-clip, padding-box, 'webkit' 'moz'); // stops bg color from leaking outside the border:
 }
 
 // Box Shadow // -----------------------------------
@@ -148,7 +162,7 @@
 //     text-overflow: ellipsis;
 //   }
 @mixin text-overflow($type) {
-  @include prefixer(text-overflow, $type, 'ms' 'o');
+  @include prefix(text-overflow, $type, 'ms' 'o');
   display: block;
   overflow: hidden;
   white-space: nowrap;
@@ -188,7 +202,7 @@
 //     transform: translate3d(0, 0, 0);
 //   }
 @mixin ha {
-  @include prefixer(transform, translate3d(0, 0, 0), 'webkit' 'ms');
+  @include prefix(transform, translate3d(0, 0, 0), 'webkit' 'ms');
 }
 
 // Opacity // ------------------------------------

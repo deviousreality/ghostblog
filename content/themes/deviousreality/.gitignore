@@ -2,3 +2,8 @@
 .sass-cache
 node_modules
 build/scss-lint-reporter.xml
+
+#ignore gruntfile file results
+assets/css/styles.min.css
+assets/css/styles.min.css.map
+assets/fonts

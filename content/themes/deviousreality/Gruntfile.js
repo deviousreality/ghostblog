@@ -1,3 +1,4 @@
+'use strict';
 
 var buildDirectory = "./build",
     distDirectory = "./assets",
@@ -14,8 +15,8 @@ var buildDirectory = "./build",
 
           copy: {
             fonts : {
-              cwd: '<%=paths.build %>/fonts',
-              dest: '<%=paths.dist %>/fonts',
+              cwd: '<%= paths.build %>/fonts',
+              dest: '<%= paths.dist %>/fonts',
               expand: true,
               flatten: false,
               filter: 'isFile',
@@ -26,10 +27,10 @@ var buildDirectory = "./build",
           sass: {
             dist: {
               files: [{
-                cwd: '<%=paths.build %>/scss',
-                dest: '<%=paths.dest %>/css',
+                cwd: '<%= paths.build %>/scss',
+                dest: '<%= paths.dist %>/css',
                 expand: true,
-                ext: '.min/css',
+                ext: '.min.css',
                 src: 'styles.scss'
               }],
               options: {
@@ -40,22 +41,22 @@ var buildDirectory = "./build",
 
           scsslint: {
             allFiles: [
-              '<%=paths.build %>/scss/{,*/}*.scss'
+              '<%= paths.build %>/scss/{,*/}*.scss'
             ],
             options: {
-              config: '<%=paths.build %>/.scss-lint.yml',
-              reporterOutput: '<%=paths.build %>/scss-lint-reporter.xml',
+              config: '<%= paths.build %>/.scss-lint.yml',
+              reporterOutput: '<%= paths.build %>/scss-lint-reporter.xml',
               colorizeOutput: 'true'
             }
           },
 
           watch: {
             sass: {
-              files: ['<%=paths.build %>/{,*/}*.{scss, sass}'],
-              tasks: ['sass']
+              files: ['<%= paths.build %>/scss/{,*/}*.{scss, sass}'],
+              tasks: ['sass:dist']
             },
             scsslint: {
-              files: ['<%=paths.build %>/{,*/}*.{scss, sass}'],
+              files: ['<%= paths.build %>/scss/{,*/}*.{scss, sass}'],
               tasks: ['scsslint']
             }
           }

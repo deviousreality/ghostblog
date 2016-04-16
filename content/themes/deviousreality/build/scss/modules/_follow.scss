@@ -1,0 +1,30 @@
+// Module for follow icons
+
+.m-follow {
+  @include clearfix;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.m-follow--title {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.m-follow--item {
+  display: inline-block;
+  margin: 0 0.3rem;
+  padding: 0.2rem;
+  //background-color: $cod-gray;
+  line-height: 0;
+  border: 1px solid $silver;
+  @include border-radius(0.5rem, 0.5rem, 0.5rem, 0.5rem);
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.m-follow--icon {
+  color: $cornflower-blue;
+}

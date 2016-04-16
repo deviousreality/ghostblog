@@ -63,6 +63,7 @@
     "rss": "1.2.1",
     "semver": "5.1.0",
     "showdown-ghost": "0.3.6",
+    "sqlite3": "3.1.1",
     "unidecode": "0.1.8",
     "validator": "4.5.0",
     "xml": "1.0.1"
@@ -92,6 +93,7 @@
     "grunt-update-submodules": "0.4.1",
     "istanbul": "0.4.2",
     "jscs-jsdoc": "1.3.1",
+    "load-grunt-tasks": "^3.5.0",
     "matchdep": "1.0.0",
     "mocha": "2.4.5",
     "nock": "7.1.0",
@@ -101,11 +103,21 @@
     "should-http": "0.0.4",
     "should-sinon": "0.0.5",
     "sinon": "1.17.3",
-    "sqlite3": "3.1.1",
     "supertest": "1.1.0",
+    "time-grunt": "^1.3.0",
     "top-gh-contribs": "2.0.2"
   },
   "greenkeeper": {
-    "ignore": ["bower", "bluebird", "glob", "lodash", "mysql", "nodemailer", "pg", "showdown-ghost", "validator"]
+    "ignore": [
+      "bower",
+      "bluebird",
+      "glob",
+      "lodash",
+      "mysql",
+      "nodemailer",
+      "pg",
+      "showdown-ghost",
+      "validator"
+    ]
   }
 }
