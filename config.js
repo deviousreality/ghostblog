@@ -11,33 +11,42 @@ config = {
     // When running Ghost in the wild, use the production environment.
     // Configure your URL and mail settings here
     production: {
-        url: process.env.URL,
+        url: 'http://my-ghost-blog.com',
         mail: {},
         database: {
-            client: 'mysql',
+			// ### Deployed settings
+            //client: 'mysql',
+            //connection: {
+            //    host: process.env.RDS_HOSTNAME,
+            //    user: process.env.RDS_USERNAME,
+            //    password: process.env.RDS_PASSWORD,
+            //    database: process.env.RDS_DB_NAME,
+            //    port: process.env.RDS_PORT
+            //},
+            client: 'sqlite3',
             connection: {
-                host: process.env.RDS_HOSTNAME,
-                user: process.env.RDS_USERNAME,
-                password: process.env.RDS_PASSWORD,
-                database: process.env.RDS_DB_NAME,
-                port: process.env.RDS_PORT
+                filename: path.join(__dirname, '/content/data/ghost.db')
             },
             debug: false
         },
+
         server: {
-            host: '0.0.0.0',
-            port: process.env.PORT
+			// ## Deployed Settings
+			//host: '0.0.0.0',
+            //port: process.env.PORT
+            host: '127.0.0.1',
+            port: '2368'
         },
-        storage: {
-            active: 'ghost-s3',
-            'ghost-s3': {
+		storage: {
+			active: 's3',
+			's3': {
                 accessKeyId: process.env.IAM_ACCESS_KEY,
                 secretAccessKey: process.env.IAM_SECRET_KEY,
                 bucket: process.env.S3_BUCKET_NAME,
                 region: process.env.S3_BUCKET_REGION,
                 assetHost: 'https://s3.amazonaws.com/deviousreality-ghostblog/'
-            }
-        },
+			}
+		}
     },
 
     // ### Development **(default)**
@@ -45,6 +54,11 @@ config = {
         // The url to use when providing links to the site, E.g. in RSS and email.
         // Change this to your Ghost blog's published URL.
         url: 'http://localhost:2368',
+
+        // Example refferer policy
+        // Visit https://www.w3.org/TR/referrer-policy/ for instructions
+        // default 'origin-when-cross-origin',
+        // referrerPolicy: 'origin-when-cross-origin',
 
         // Example mail config
         // Visit http://support.ghost.org/mail for instructions
@@ -104,7 +118,8 @@ config = {
                     'PRAGMA locking_mode=EXCLUSIVE;' +
                     'BEGIN EXCLUSIVE; COMMIT;', done);
                 }
-            }
+            },
+            useNullAsDefault: true
         },
         server: {
             host: '127.0.0.1',

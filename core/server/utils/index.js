@@ -1,6 +1,5 @@
 var unidecode  = require('unidecode'),
     _          = require('lodash'),
-
     utils,
     getRandomInt;
 
@@ -99,7 +98,11 @@ utils = {
         /*jslint unparam:true*/
         res.set({'Cache-Control': 'public, max-age=' + utils.ONE_YEAR_S});
         res.redirect(301, path);
-    }
+    },
+
+    readCSV: require('./read-csv'),
+    removeOpenRedirectFromUrl: require('./remove-open-redirect-from-url'),
+    zipFolder: require('./zip-folder')
 };
 
 module.exports = utils;
